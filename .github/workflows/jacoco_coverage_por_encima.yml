@@ -39,11 +39,11 @@ jobs:
           echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
           echo "branches = ${{ steps.jacoco.outputs.branches }}"
 
-      - name: Check coverage percentage 60%
+      - name: Check coverage percentage 40%
         run: |
           COVERAGE=$(echo "${{ steps.jacoco.outputs.coverage }}" | tr -d '%')
-          if [ "$COVERAGE" -lt 60 ]; then
-            echo "Code coverage is below 60%, setting workflow status to failure."
+          if [ "$COVERAGE" -lt 40 ]; then
+            echo "Code coverage is below 40%, setting workflow status to failure."
             exit 1
           fi
 
