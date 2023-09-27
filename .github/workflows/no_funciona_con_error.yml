@@ -1,4 +1,4 @@
-name: Funciona con error
+name: No funciona con error
 
 on:
   push:
