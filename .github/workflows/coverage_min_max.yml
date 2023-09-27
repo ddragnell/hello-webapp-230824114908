@@ -1,4 +1,4 @@
-name: Jacoco Coverage falla por debajo
+name: Jacoco Coverage entre rangos
 
 on:
   push:
@@ -33,15 +33,13 @@ jobs:
           generate-branches-badge: true
           generate-summary: true
           coverage-range-badge: true
-          coverage-range-lower-bound: 50.0
-          coverage-range-upper-bound: 60.0
+          coverage-range-lower-bound: 55.0
+          coverage-range-upper-bound: 80.0
 
       - name: Log coverage percentages to workflow output
         run: |
           echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
           echo "branches = ${{ steps.jacoco.outputs.branches }}"
-
-     
 
       - name: Comment on PR with coverage percentages
         if: ${{ github.event_name == 'pull_request' }}
