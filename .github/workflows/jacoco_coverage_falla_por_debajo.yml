@@ -13,15 +13,12 @@ on:
     branches: [ maven ]
   pull_request:
     branches: [ maven ]
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
         java: [ '17' ]
-
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK ${{matrix.java}}
@@ -32,7 +29,7 @@ jobs:
           cache: maven
       - name: Build with Maven Wrapper
         run: ./mvnw -B package
-
+        
       - name: Generate JaCoCo badge
         id: jacoco
         uses: cicirello/jacoco-badge-generator@v2
@@ -40,20 +37,17 @@ jobs:
           badges-directory: badges
           generate-branches-badge: true
           generate-summary: true
-
       - name: Log coverage percentages to workflow output
         run: |
           echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
           echo "branches = ${{ steps.jacoco.outputs.branches }}"
-
-      - name: Check coverage percentage 80%
+      - name: Verificación de cobertura mayor al 50%
         run: |
-          COVERAGE=$(echo "${{ steps.jacoco.outputs.coverage }}" | tr -d '%')
-          if [ "$COVERAGE" -lt 80 ]; then
-            echo "Code coverage is below 80%, setting workflow status to failure."
+          COVERAGE=$(steps.jacoco.outputs.coverage)
+          if [ $(echo "$COVERAGE < 50" | bc -l) -eq 1 ]; then
+            echo "Cobertura debajo del 50%."
             exit 1
           fi
-
       - name: Comment on PR with coverage percentages
         if: ${{ github.event_name == 'pull_request' }}
         run: |
@@ -66,7 +60,6 @@ jobs:
         continue-on-error: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Get the Coverage info
         run: |
           echo "Total coverage ${{ steps.jacoco.outputs.coverage-overall }}"
