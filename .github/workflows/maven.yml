@@ -24,4 +24,4 @@ jobs:
           cache: maven
       - name: Build with Maven Wrapper
         run: ./mvnw -B package
-        continue-on-error: true 
+        continue-on-error: false
