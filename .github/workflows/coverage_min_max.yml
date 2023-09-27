@@ -39,7 +39,6 @@ jobs:
 
       - name: Check coverage in range
         run: |
-          COVERAGE=$(jq -r '.coverage' <<< "$REPORT")
           if [ steps.jacoco.outputs.coverage < 55.0 || steps.jacoco.outputs.coverage > 80.0 ]; then
             echo "Code coverage is out of range."
             exit 1
