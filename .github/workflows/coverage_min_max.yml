@@ -36,6 +36,15 @@ jobs:
           coverage-range-lower-bound: 55.0
           coverage-range-upper-bound: 80.0
 
+
+      - name: Check coverage in report
+        run: |
+          COVERAGE=$(jq -r '.coverage' <<< "$REPORT")
+          if [ "$COVERAGE" -lt 55.0 || "$COVERAGE" -gt 80.0 ]; then
+            echo "Code coverage is out of range."
+            exit 1
+          fi
+
       - name: Log coverage percentages to workflow output
         run: |
           echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
