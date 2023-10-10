@@ -1,7 +1,8 @@
 FROM openjdk:11-jdk-alpine
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-EXPOSE 5128
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+RUN ./mvnw dependency:resolve
+COPY src ./src
+EXPOSE 8080
 CMD [ "node", "index.js"]
