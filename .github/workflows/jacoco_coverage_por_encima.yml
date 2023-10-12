@@ -10,9 +10,9 @@ name: Jacoco Coverage
 
 on:
   push:
-    branches: [ maven ]
+    branches: [ gradle ]
   pull_request:
-    branches: [ maven ]
+    branches: [ gradle ]
 
 jobs:
   build:
