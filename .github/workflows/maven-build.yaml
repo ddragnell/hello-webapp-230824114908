@@ -17,7 +17,7 @@ jobs:
         run: |
           docker login --username ddragnell --password ${{ secrets.DOCKER_RUN }} ghcr.io
           docker build . -t ghcr.io/ddragnell/pet-clinic:latest
-          docker push ghcr.io/ddragnell/petclinic:latest
+          docker push ghcr.io/ddragnell/pet-clinic:latest
      
       - name: Build with Maven Wrapper
         run: ./mvnw -B package
