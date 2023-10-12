@@ -16,8 +16,8 @@ jobs:
       - name: Build Docker Image
         run: |
           docker login --username ddragnell --password ${{ secrets.DOCKER_RUN }} ghcr.io
-          docker build . --tag ddragnell/pet-clinic:latest
-          docker push ddragnell/petclinic:latest
+          docker build . --tag ghcr.io/ddragnell/pet-clinic:latest
+          docker push ghcr.io/ddragnell/petclinic:latest
      
       - name: Build with Maven Wrapper
         run: ./mvnw -B package
