@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ maven ]
 
+env:
+
+  TAG: ${{ github.head_ref }}
+
 jobs:
   build:
 
@@ -24,8 +28,8 @@ jobs:
       - name: Build Docker Image
         run: |
           docker login --username ddragnell --password ${{ secrets.DOCKER_RUN }} ghcr.io
-          docker build . -t ghcr.io/ddragnell/pet-clinic:latest
-          docker push ghcr.io/ddragnell/pet-clinic:latest
+          docker build . -t ghcr.io/ddragnell/pet-clinic:v${{ github.head_ref }}
+          docker push ghcr.io/ddragnell/pet-clinic:v${{ github.head_ref }}
      
       - name: Build with Maven Wrapper
         run: ./mvnw -B package
