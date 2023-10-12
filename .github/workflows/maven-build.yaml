@@ -1,0 +1,23 @@
+name: Docker Image en Maven
+
+on:
+  push:
+    branches: [ maven ]
+  pull_request:
+    branches: [ maven ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build Docker Image
+        run: |
+          docker login --username ddragnell --password ${{ secrets.DOCKER_BUILD }} ghcr.io
+          docker build . --tag ddragnell/pet-clinic:latest
+          docker push ddragnell/petclinic:latest
+     
+      - name: Build with Maven Wrapper
+        run: ./mvnw -B package
