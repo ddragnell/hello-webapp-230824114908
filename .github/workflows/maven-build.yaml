@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Build Docker Image
         run: |
-          docker login --username ddragnell --password ${{ secrets.DOCKER_BUILD }} ghcr.io
+          docker login --username ddragnell --password ${{ secrets.DOCKER_RUN }} ghcr.io
           docker build . --tag ddragnell/pet-clinic:latest
           docker push ddragnell/petclinic:latest
      
