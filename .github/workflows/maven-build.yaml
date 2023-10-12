@@ -8,7 +8,7 @@ on:
 
 env:
 
-  TAG: ${{ github.head_ref }}
+  TAG: ${{ github.event_name }}
 
 jobs:
   build:
@@ -28,8 +28,8 @@ jobs:
       - name: Build Docker Image
         run: |
           docker login --username ddragnell --password ${{ secrets.DOCKER_RUN }} ghcr.io
-          docker build . -t ghcr.io/ddragnell/pet-clinic:v${{ github.head_ref }}
-          docker push ghcr.io/ddragnell/pet-clinic:v${{ github.head_ref }}
+          docker build . -t ghcr.io/ddragnell/pet-clinic:${{ github.event_name }}
+          docker push ghcr.io/ddragnell/pet-clinic:${{ github.event_name }}
      
       - name: Build with Maven Wrapper
         run: ./mvnw -B package
