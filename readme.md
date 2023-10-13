@@ -172,7 +172,7 @@ Github Container Registery is a free alternative to ACR, we can push Docker imag
 
 # How to download a Docker Image
 
-To download a Docker Image from this repository, click to this [link] (https://github.com/ddragnell?tab=packages), then click on "pet-clinic" and select the Image you want to use (we recomend the latest one), copy the command and paste it on your local folder where you want to save it (make sure to run docker desktop or docker daemon when you clone the image to your folder) ![image](https://github.com/ddragnell/hello-webapp-230824114908/assets/45155966/c3d6d14b-fb1b-4555-97ec-bf3664b0eed4)
+To download a Docker Image from this repository, click to this [link](https://github.com/ddragnell?tab=packages), then click on "pet-clinic" and select the Image you want to use (we recomend the latest one), copy the command and paste it on your local folder where you want to save it (make sure to run docker desktop or docker daemon when you clone the image to your folder) ![image](https://github.com/ddragnell/hello-webapp-230824114908/assets/45155966/c3d6d14b-fb1b-4555-97ec-bf3664b0eed4)
 
 
 # License
