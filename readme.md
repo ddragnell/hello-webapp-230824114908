@@ -162,7 +162,7 @@ For pull requests, editor preferences are available in the [editor config](.edit
 
 # Docker container and continuous deploy
 
-For containerization we used Github Packages (ghcr.io), due to Azure Container Registery's service costs, to do that we settle an .yaml file on Github Workflows folder called "docker-build.yaml", then set the condition to activate this github pipeline, we declare an environment variable called "TAG" where we are going to save an github token to identify our image, the reason to use an token is due the security of the data and get an unique identifier for each image created. Once created the env var, we execute the Build and push image cvommand, he image is labeled with the pipeline token value. The docker push command then publishes the image to ghcr.
+For containerization we used Github Packages (ghcr.io), due to Azure Container Registery's service costs, to do that we settle an .yaml file on Github Workflows folder called "docker-build.yaml", then set the condition to activate this github pipeline, we declare an environment variable called "NAME" where we are going to save an github token to identify our image, the reason to use an token is due the security of the data and get an unique identifier for each image created. Once created the env var, we execute the Build and push image cvommand, he image is labeled with the pipeline token value. The docker push command then publishes the image to ghcr.
 
 # Use of GHCR
 
