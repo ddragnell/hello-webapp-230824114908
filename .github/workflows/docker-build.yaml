@@ -28,5 +28,5 @@ jobs:
       - name: Build Docker Image
         run: |
           docker login --username ddragnell --password ${{ secrets.DOCKER_RUN }} ghcr.io
-          docker build . -t ghcr.io/ddragnell/pet-clinic:${{ github.token }} -t ghcr.io/ddragnell/pet-clinic:${{ github.id_number }}
+          docker build . -t ghcr.io/ddragnell/pet-clinic:${{ github.token }} -t ghcr.io/ddragnell/pet-clinic:${{ github.run_number }}
           docker push ghcr.io/ddragnell/pet-clinic:${{ github.token }}
