@@ -8,7 +8,7 @@ on:
 
 env:
 
-  TAG: ${{ github.run_id }}
+  TAG: ${{ toJSON(github.head_ref) }}
 
 jobs:
   build:
@@ -28,5 +28,5 @@ jobs:
       - name: Build Docker Image
         run: |
           docker login --username ddragnell --password ${{ secrets.DOCKER_RUN }} ghcr.io
-          docker build . -t ghcr.io/ddragnell/pet-clinic:${{ github.run_id }}
-          docker push ghcr.io/ddragnell/pet-clinic:${{ github.run_id }}
+          docker build . -t ghcr.io/ddragnell/pet-clinic:${{ toJSON(github.head_ref) }}
+          docker push ghcr.io/ddragnell/pet-clinic:${{ toJSON(github.head_ref) }}
