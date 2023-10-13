@@ -1,5 +1,5 @@
 FROM eclipse-temurin:17-jdk-jammy
-LABEL org.opencontainers.image.description Imágen para la materia gestión de la configuración
+LABEL org.opencontainers.image.description Imagen para la materia gestión de la configuración
 WORKDIR /app
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
