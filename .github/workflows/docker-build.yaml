@@ -8,7 +8,7 @@ on:
 
 env:
 
-  TAG: ${{ github.run_number }}
+  TAG: ${{ github.token }}
 
 jobs:
   build:
