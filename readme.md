@@ -33,7 +33,8 @@ Or you can run it from Maven directly using the Spring Boot Maven plugin. If you
 
 ## Building a Container
 
-There is no `Dockerfile` in this project. You can build a container image (if you have a docker daemon) using the Spring Boot build plugin:
+There is a dockerFile document where is declared the environment to create the image of the artifact, do not change it!!! ![image](https://github.com/ddragnell/hello-webapp-230824114908/assets/45155966/3338434b-8170-4787-b62b-4166354de1d6)
+
 
 ```
 ./mvnw spring-boot:build-image
@@ -157,6 +158,22 @@ Here is a list of them:
 The [issue tracker](https://github.com/spring-projects/spring-petclinic/issues) is the preferred channel for bug reports, features requests and submitting pull requests.
 
 For pull requests, editor preferences are available in the [editor config](.editorconfig) for easy use in common text editors. Read more and download plugins at <https://editorconfig.org>. If you have not previously done so, please fill out and submit the [Contributor License Agreement](https://cla.pivotal.io/sign/spring).
+
+
+# Docker container and continuous deploy
+
+For containerization we used Github Packages (ghcr.io), due to Azure Container Registery's service costs, to do that we settle an .yaml file on Github Workflows folder called "docker-build.yaml", then set the condition to activate this github pipeline, we declare an environment variable called "TAG" where we are going to save an github token to identify our image, the reason to use an token is due the security of the data and get an unique identifier for each image created. Once created the env var, we execute the Build and push image cvommand, he image is labeled with the pipeline token value. The docker push command then publishes the image to ghcr.
+
+# Use of GHCR
+
+Github Container Registery is a free alternative to ACR, we can push Docker images there using a secret key for a user where will be saved the images for the use uf the public.
+
+![image](https://github.com/ddragnell/hello-webapp-230824114908/assets/45155966/c9cf5863-429e-4d78-924b-a2ce5b04c51f)
+
+# How to download a Docker Image
+
+To download a Docker Image from this repository, click to this [link] (https://github.com/ddragnell?tab=packages), then click on "pet-clinic" and select the Image you want to use (we recomend the latest one), copy the command and paste it on your local folder where you want to save it (make sure to run docker desktop or docker daemon when you clone the image to your folder) ![image](https://github.com/ddragnell/hello-webapp-230824114908/assets/45155966/c3d6d14b-fb1b-4555-97ec-bf3664b0eed4)
+
 
 # License
 
