@@ -29,6 +29,50 @@ jobs:
         with:
           name: java-app
           path: '${{ github.workspace }}/target/*.jar'
+          
+      - name: Generate JaCoCo badge
+        id: jacoco
+        uses: cicirello/jacoco-badge-generator@v2
+        with:
+          badges-directory: badges
+          generate-branches-badge: true
+          generate-summary: true
+
+      - name: Log coverage percentages to workflow output
+        run: |
+          echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
+          echo "branches = ${{ steps.jacoco.outputs.branches }}"
+
+      - name: Check coverage percentage 50%
+        run: |
+          COVERAGE=$(echo "${{ steps.jacoco.outputs.coverage }}" | tr -d '%')
+          if [ "$COVERAGE" -lt 50 ]; then
+            echo "Code coverage is below 50%, setting workflow status to failure."
+            exit 1
+          fi
+      - name: Fail if coverage is below 60%
+        if: ${{ steps.jacoco.outputs.coverage < 60.0 }}
+        run: |
+            echo "Code coverage is below 60%."
+            exit 1
+
+      - name: Comment on PR with coverage percentages
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
+          PORT=$(<badges/coverage-summary.json)
+          COVERAGE=$(jq -r '.coverage' <<< "$REPORT")%
+          BRANCHES=$(jq -r '.branches' <<< "$REPORT")%
+          NEWLINE=$'\nRE'
+          BODY="## JaCoCo Test Coverage Summary Statistics${NEWLINE}* __Coverage:__ ${COVERAGE}${NEWLINE}* __Branches:__ ${BRANCHES}"
+          gh pr comment ${{github.event.pull_request.number}} -b "${BODY}"
+        continue-on-error: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get the Coverage info
+        run: |
+          echo "Total coverage ${{ steps.jacoco.outputs.coverage-overall }}"
+          echo "Changed Files coverage ${{ steps.jacoco.outputs.coverage-changed-files }}"
 
   deploy:
     runs-on: ubuntu-latest
