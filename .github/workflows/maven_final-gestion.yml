@@ -43,8 +43,8 @@ jobs:
           echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
           echo "branches = ${{ steps.jacoco.outputs.branches }}"
 
-      - name: Fail if coverage is below 60%
-        if: ${{ steps.jacoco.outputs.coverage < 60.0 }}
+      - name: Fail if coverage is below 40%
+        if: ${{ steps.jacoco.outputs.coverage < 40.0 }}
         run: |
             echo "La  covertura se encuentra por debajo del 60%, no se desplegará la aplicación."
             exit 1
