@@ -2,9 +2,9 @@ name: Docker Image en Maven
 
 on:
   push:
-    branches: [ maven ]
+    branches: [ gradle ]
   pull_request:
-    branches: [ maven ]
+    branches: [ gradle ]
 
 env:
 
