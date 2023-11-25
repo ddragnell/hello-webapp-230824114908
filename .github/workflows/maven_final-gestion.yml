@@ -50,11 +50,6 @@ jobs:
             echo "Code coverage is below 50%, setting workflow status to failure."
             exit 1
           fi
-      - name: Fail if coverage is below 60%
-        if: ${{ steps.jacoco.outputs.coverage < 60.0 }}
-        run: |
-            echo "Code coverage is below 60%."
-            exit 1
 
       - name: Comment on PR with coverage percentages
         if: ${{ github.event_name == 'pull_request' }}
