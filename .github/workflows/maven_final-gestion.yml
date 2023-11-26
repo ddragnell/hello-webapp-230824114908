@@ -43,11 +43,13 @@ jobs:
           echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
           echo "branches = ${{ steps.jacoco.outputs.branches }}"
 
-      - name: Fail if coverage is below 40%
-        if: ${{ steps.jacoco.outputs.coverage < 40.0 }}
+      - name: Check coverage percentage 50%
         run: |
-            echo "La  covertura se encuentra por debajo del 60%, no se desplegará la aplicación."
+          COVERAGE=$(echo "${{ steps.jacoco.outputs.coverage }}" | tr -d '%')
+          if [ "$COVERAGE" -lt 50 ]; then
+            echo "La cobertura es menor al 50%, no se desplegará la aplicación."
             exit 1
+          fi
 
       - name: Comment on PR with coverage percentages
         if: ${{ github.event_name == 'pull_request' }}
